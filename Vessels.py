@@ -9,19 +9,14 @@ class Miranda:
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
 
-  def attack(self):
-
-      if self.__attack_choice == 1:
-          print("Torpedoes away.")
-          attack_points = random.randint(18,25)
-          return attack_points
-
-      elif self.__attack_choice == 2:
-          attack_points = random.randint(10,35)
-          return attack_points
-
-      else:
-          print("That is not a selection. You lost your turn!")
+  def energy(self):
+    print("\nFiring phasers.")
+    attack_points = random.randint(10,30)
+    return attack_points
+  def torpedo(self):
+    print("\nTorpedoes away.")
+    attack_points = random.randint(15,50)
+    return attack_points
 
   def heal(self):
 
@@ -46,19 +41,14 @@ class Saber:
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
 
-  def attack(self):
-
-      if self.__attack_choice == 1:
-          print("Torpedoes away.")
-          attack_points = random.randint(18,25)
-          return attack_points
-
-      elif self.__attack_choice == 2:
-          attack_points = random.randint(10,35)
-          return attack_points
-
-      else:
-          print("That is not a selection. You lost your turn!")
+  def energy(self):
+    print("\nFiring phasers.")
+    attack_points = random.randint(10,30)
+    return attack_points
+  def torpedo(self):
+    print("\nTorpedoes away.")
+    attack_points = random.randint(15,50)
+    return attack_points
 
   def heal(self):
 

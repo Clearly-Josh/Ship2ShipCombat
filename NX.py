@@ -19,20 +19,25 @@ vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1), Vessels.Saber("USS Ski
 ###########################################################################
 
 def turn(actingVessel):
-  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report")
+  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel")
   orders = eval(input("\nYour orders? "))
 
   if orders == 1 or orders == 2:
-    pewpew = eval(input("\nWho are we firing at? "))
+    print("")
+    length = len(vessels)    
+    for i in range(length): 
+      if vessels[i].hull > 0:
+        print(i,""+vessels[i].name) 
+    pewpew = eval(input("Who are we firing at? "))
     target = vessels[pewpew]
 
     if orders == 1:
-      damage = vessels[actingVessel].attack()
+      damage = vessels[actingVessel].energy()
       target.hull = (target.hull - damage)
-      print("You dealt",damage,"damage.")
+      print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
     if orders == 2:
-      damage = actingVessel.attack()
+      damage = vessels[actingVessel].torpedo()
       target.hull = (target.hull - damage)
       print("You dealt",damage,"damage.")
       #print(target.hull)
@@ -51,10 +56,9 @@ while battle_continue == True:
 
   turn(actingVessel)
 
-  if actingVessel >=1:
-    battle_continue = False
-
   #if vessels[0] <= 0
    # battle_continue = False
 
   actingVessel += 1
+  if actingVessel >=2:
+    battle_continue = False
