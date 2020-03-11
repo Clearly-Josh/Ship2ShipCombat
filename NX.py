@@ -2,32 +2,40 @@
 
 import random
 
-class Pokemon:
+import Vessels
+p1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
 
-    """Blueprint for turn based Pokemon battle"""
+#p1 = Miranda("USS Robert Scott", 10000, 1)
+p1.displayShipName()
+p2=p1.attack()
+print(p2)
 
-    def __init__(self, attack_choice):
+# class Pokemon:
 
-        self.__attack_choice = attack_choice
+#     """Blueprint for turn based Pokemon battle"""
+
+#     def __init__(self, attack_choice):
+
+#         self.__attack_choice = attack_choice
 
 
-    def attack(self):
+#     def attack(self):
 
-        if self.__attack_choice == 1:
-            attack_points = random.randint(18,25)
-            return attack_points
+#         if self.__attack_choice == 1:
+#             attack_points = random.randint(18,25)
+#             return attack_points
 
-        elif self.__attack_choice == 2:
-            attack_points = random.randint(10,35)
-            return attack_points
+#         elif self.__attack_choice == 2:
+#             attack_points = random.randint(10,35)
+#             return attack_points
 
-        else:
-            print("That is not a selection. You lost your turn!")
+#         else:
+#             print("That is not a selection. You lost your turn!")
 
-    def heal(self):
+#     def heal(self):
 
-        heal_points = random.randint(18,25)
-        return heal_points    
+#         heal_points = random.randint(18,25)
+#         return heal_points    
 
 ###########################################################################
 
