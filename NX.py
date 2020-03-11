@@ -4,38 +4,16 @@ import random
 
 import Vessels
 p1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
+p2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
 
-#p1 = Miranda("USS Robert Scott", 10000, 1)
+#class test statements
 p1.displayShipName()
-p2=p1.attack()
-print(p2)
-
-# class Pokemon:
-
-#     """Blueprint for turn based Pokemon battle"""
-
-#     def __init__(self, attack_choice):
-
-#         self.__attack_choice = attack_choice
-
-
-#     def attack(self):
-
-#         if self.__attack_choice == 1:
-#             attack_points = random.randint(18,25)
-#             return attack_points
-
-#         elif self.__attack_choice == 2:
-#             attack_points = random.randint(10,35)
-#             return attack_points
-
-#         else:
-#             print("That is not a selection. You lost your turn!")
-
-#     def heal(self):
-
-#         heal_points = random.randint(18,25)
-#         return heal_points    
+pa=p1.attack()
+#print(pa)
+p2.displayShipName()
+pa=p2.attack()
+#print(pa)
+print(p2.hull)
 
 ###########################################################################
 
@@ -44,7 +22,7 @@ mew_health = 100
 battle_continue = True
 
 while battle_continue == True:
-    print("\nATTACK CHOICES\n1. Close range attack\n2. Far range attack\n3. Heal")
+    print("\nCHOICES\n1. Launch Torpedoes\n2. Fire Energy Weapons\n3. Commence Repairs")
     attack_choice = eval(input("\nSelect an attack: "))
 
     # Mew selects an attack, but focuses on attacking if health is full.  
