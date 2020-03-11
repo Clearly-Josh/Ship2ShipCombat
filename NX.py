@@ -36,6 +36,9 @@ def turn(actingVessel):
       target.hull = (target.hull - damage)
       print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
+      
+      #example vessel kill
+      #oblivion(pewpew)
     if orders == 2:
       damage = vessels[actingVessel].torpedo()
       target.hull = (target.hull - damage)
@@ -46,9 +49,12 @@ def turn(actingVessel):
     heal_self = actingVessel.heal()
     print("You healed",heal_self,"health points.")
 
-  # user_health = user_health - damage_to_user + heal_self
-  # v1_health = v1_health - damage_to_v1 + heal_v1
+def oblivion(lost):
+  lostName = vessels[lost].name
+  vessels.pop(lost)
+  print("We mark the passing of the "+lostName+" and her crew. May God have mercy on their souls.")
 
+### battle loop ###
 battle_continue = True
 actingVessel = 0
 
