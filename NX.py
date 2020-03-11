@@ -3,8 +3,9 @@
 import random
 import Vessels
 
-v1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
-v2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
+vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1), Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)]
+#v1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
+#v2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
 
 #class test statements
 #p1.displayShipName()
@@ -17,37 +18,43 @@ v2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
 
 ###########################################################################
 
-battle_continue = True
-
-while battle_continue == True:
-  print("\nThe bridge is yours, Captain.\n1. Launch Torpedoes\n2. Fire Energy Weapons\n3. Commence Repairs\n4. Status Report")
+def turn(actingVessel):
+  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report")
   orders = eval(input("\nYour orders? "))
 
-  v1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
-  v2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
-
-  # Attacks by user and v1 are done simultaneously.
   if orders == 1 or orders == 2:
-      damage_to_v1 = v2.attack()
-      heal_self = 0
-      print("You dealt",damage_to_v1,"damage.")
+    pewpew = eval(input("\nWho are we firing at? "))
+    target = vessels[pewpew]
+
+    if orders == 1:
+      damage = vessels[actingVessel].attack()
+      target.hull = (target.hull - damage)
+      print("You dealt",damage,"damage.")
+      #print(target.hull)
+    if orders == 2:
+      damage = actingVessel.attack()
+      target.hull = (target.hull - damage)
+      print("You dealt",damage,"damage.")
+      #print(target.hull)
 
   if orders == 3:
-      heal_self = v2.heal()
-      damage_to_v1 = 0
-      print("You healed",heal_self,"health points.")
+    heal_self = actingVessel.heal()
+    print("You healed",heal_self,"health points.")
 
   # user_health = user_health - damage_to_user + heal_self
   # v1_health = v1_health - damage_to_v1 + heal_v1
 
+battle_continue = True
+actingVessel = 0
 
-  if v1.hull <= 0 or v2.hull <= 0:
+while battle_continue == True:
+
+  turn(actingVessel)
+
+  if actingVessel >=1:
     battle_continue = False
 
-if user_health < v1_health:
+  #if vessels[0] <= 0
+   # battle_continue = False
 
-    print("\nYou lost! Better luck next time!")
-
-else:
-
-    print("\nYou won against v1!")
+  actingVessel += 1
