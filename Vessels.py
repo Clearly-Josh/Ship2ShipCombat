@@ -1,9 +1,12 @@
 import random
 
 class Miranda:
-  def __init__(self, name, hull, attack_choice):
+  def __init__(self, name, hull, shield, turn, impulse, attack_choice):
     self.name = name
     self.hull = hull
+    self.shield = shield
+    self.turn = turn
+    self.impulse = impulse
     self.__attack_choice = attack_choice
 
   def displayShipName(self):

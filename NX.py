@@ -3,7 +3,7 @@
 import random
 import Vessels
 
-vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1), Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)]
+vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)]
 #v1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
 #v2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
 
