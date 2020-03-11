@@ -14,11 +14,11 @@ class Miranda:
 
   def energy(self):
     print("\nFiring phasers.")
-    attack_points = random.randint(10,30)
+    attack_points = random.randint(20,55)
     return attack_points
   def torpedo(self):
     print("\nTorpedoes away.")
-    attack_points = random.randint(15,50)
+    attack_points = random.randint(25,50)
     return attack_points
 
   def heal(self):
@@ -46,11 +46,11 @@ class Saber:
 
   def energy(self):
     print("\nFiring phasers.")
-    attack_points = random.randint(10,30)
+    attack_points = random.randint(20,55)
     return attack_points
   def torpedo(self):
     print("\nTorpedoes away.")
-    attack_points = random.randint(15,50)
+    attack_points = random.randint(25,50)
     return attack_points
 
   def heal(self):

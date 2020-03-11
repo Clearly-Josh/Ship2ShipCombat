@@ -30,9 +30,19 @@ def turn(actingVessel):
         print(i,""+vessels[i].name) 
     pewpew = eval(input("Who are we firing at? "))
     target = vessels[pewpew]
+    defenses = 0
+    if target.turn >= 10:
+      defenses +=5
+    if target.impulse >= .2:
+      defenses += 2
+    if target.shield >= 1:
+      defenses += 10
+    print("Target's defenses are: ",defenses)
 
     if orders == 1:
-      damage = vessels[actingVessel].energy()
+      damage = vessels[actingVessel].energy() - defenses
+      if damage < 0:
+        damage = 0
       target.hull = (target.hull - damage)
       print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
@@ -40,9 +50,9 @@ def turn(actingVessel):
       #example vessel kill
       #oblivion(pewpew)
     if orders == 2:
-      damage = vessels[actingVessel].torpedo()
+      damage = vessels[actingVessel].torpedo() - defenses
       target.hull = (target.hull - damage)
-      print("You dealt",damage,"damage.")
+      print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
 
   if orders == 3:
