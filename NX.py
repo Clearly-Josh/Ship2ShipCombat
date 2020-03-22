@@ -19,14 +19,14 @@ vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.S
 ###########################################################################
 
 def turn(actingVessel):
-  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel")
+  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Prioritze System")
   orders = eval(input("\nYour orders? "))
 
   if orders == 1 or orders == 2:
     print("")
     length = len(vessels)    
     for i in range(length): 
-      if vessels[i].hull > 0:
+      if vessels[i].hull > 0 and i != actingVessel:
         print(i,""+vessels[i].name) 
     pewpew = eval(input("Who are we firing at? "))
     target = vessels[pewpew]
@@ -56,8 +56,10 @@ def turn(actingVessel):
       #print(target.hull)
 
   if orders == 3:
-    heal_self = actingVessel.heal()
-    print("You healed",heal_self,"health points.")
+  	print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
+  	orders = eval(input("\nYour orders? "))
+  	heal_self = vessels[actingVessel].heal(orders)
+  	#print("You healed",heal_self,"health points.")
 
 def oblivion(lost):
   lostName = vessels[lost].name
