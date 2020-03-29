@@ -34,6 +34,7 @@ def turn(actingVessel):
   enOffline = 0
   torpOffline = 0
   shieldOffline = 0
+  vessels[actingVessel].maneuverBonus = 0
 
   while officersActed <= 3:
     if officersActed == 0:

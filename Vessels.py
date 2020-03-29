@@ -2,7 +2,7 @@ import random
 
 def calcDefenses(ship2Calc):
   ship2Calc.defenses = (ship2Calc.turn * 2) + (ship2Calc.impulse * 10) + (ship2Calc.shield * 100) + ship2Calc.maneuverBonus
-  print("Our vessel's defense rating is now",ship2Calc.defenses)
+  print("Vessel defensive rating is now",ship2Calc.defenses)
   return ship2Calc.defenses
 
 def displayShipName(self):
