@@ -9,7 +9,7 @@ vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.S
 ###########################################################################
 
 def turn(actingVessel):
-  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Enhance System")
+  print("\nThe bridge of the",vessels[actingVessel].name,"is yours.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Enhance System")
   orders = eval(input("\nYour orders? "))
 
   if orders == 1 or orders == 2:
@@ -20,14 +20,7 @@ def turn(actingVessel):
         print(i,""+vessels[i].name) 
     pewpew = eval(input("Who are we firing at? "))
     target = vessels[pewpew]
-    defenses = 0
-    if target.turn >= 10:
-      defenses +=5
-    if target.impulse >= .2:
-      defenses += 2
-    if target.shield >= 1:
-      defenses += 10
-    print("Target's defenses are: ",defenses)
+    print("Target's defenses are: ",vessels[pewpew].defenses)
 
     if orders == 1:
       damage = vessels[actingVessel].energy() - defenses
@@ -36,20 +29,33 @@ def turn(actingVessel):
       target.hull = (target.hull - damage)
       print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
-      
-      #example vessel kill
-      #oblivion(pewpew)
+      if target.hull <= 0:
+        oblivion(pewpew)
+
     if orders == 2:
       damage = vessels[actingVessel].torpedo() - defenses
       target.hull = (target.hull - damage)
       print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
+      if target.hull <= 0:
+        oblivion(pewpew)
 
   if orders == 3:
-  	print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
-  	orders = eval(input("\nYour orders? "))
+  	#print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
+  	#orders = eval(input("\nYour orders? "))
   	heal_self = vessels[actingVessel].heal(orders)
   	
+  if orders == 4:
+    print("The hull is at",vessels[actingVessel].hull)
+    print("Energy weapons are",vessels[actingVessel].energyStatus)
+    print("Torpedoes are",vessels[actingVessel].torpedoStatus)
+    print("Maneuverability is at",vessels[actingVessel].turn)
+    print("Engines are at",vessels[actingVessel].impulse)
+    print("Our defensive rating is",vessels[actingVessel].defenses)
+
+  if orders == 6:
+    vessels[actingVessel].defenses+=2
+
 
 def oblivion(lost):
   lostName = vessels[lost].name
@@ -69,4 +75,5 @@ while battle_continue == True:
 
   actingVessel += 1
   if actingVessel >=2:
-    battle_continue = False
+    actingVessel = 0
+    #battle_continue = False

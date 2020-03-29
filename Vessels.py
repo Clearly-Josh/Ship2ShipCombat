@@ -4,11 +4,22 @@ class Miranda:
   def __init__(self, name, hull, shield, turn, impulse, attack_choice):
     self.name = name
     self.hull = hull
+    self.hullMax = hull
     self.shield = shield
+    self.shieldStatus="Operational"
     self.turn = turn
     self.impulse = impulse
+    self.engineMax = turn + impulse
     self.__attack_choice = attack_choice
-    #self.energyStat=
+    self.energyStatus="Operational"
+    self.torpedoStatus="Operational"
+    self.defenses = 0
+    if self.turn >= 10:
+      self.defenses +=5
+    if self.impulse >= .2:
+      self.defenses += 2
+    if self.shield >= 1:
+      self.defenses += 10
 
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
@@ -26,8 +37,9 @@ class Miranda:
       #if sys==1: 
       #elif sys == 5:
       heal_points = random.randint(18,25)
-      self.hull+=heal_points
-      print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)
+      if self.hullMax > self.hull:
+        self.hull+=heal_points
+        print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)
   
 #tests for Mirand class
 # p1 = Miranda("USS Robert Scott", 10000, 1)
@@ -39,10 +51,22 @@ class Saber:
   def __init__(self, name, hull, shield, turn, impulse, attack_choice):
     self.name = name
     self.hull = hull
+    self.hullMax = hull
     self.shield = shield
+    self.shieldStatus="Operational"
     self.turn = turn
     self.impulse = impulse
+    self.engineMax = turn + impulse
     self.__attack_choice = attack_choice
+    self.energyStatus="Operational"
+    self.torpedoStatus="Operational"
+    self.defenses = 0
+    if self.turn >= 10:
+      self.defenses +=5
+    if self.impulse >= .2:
+      self.defenses += 2
+    if self.shield >= 1:
+      self.defenses += 10
 
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
@@ -56,7 +80,10 @@ class Saber:
     attack_points = random.randint(25,50)
     return attack_points
 
-  def heal(self):
-
+  def heal(self,sys):
+      #if sys==1: 
+      #elif sys == 5:
       heal_points = random.randint(18,25)
-      return heal_points
+      if self.hullMax > self.hull:
+        self.hull+=heal_points
+        print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)
