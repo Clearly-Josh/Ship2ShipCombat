@@ -66,8 +66,21 @@ def turn(actingVessel):
     print("Their defensive rating is",subject.defenses)
   
   if orders == 6:
-    vessels[actingVessel].defenses+=2
+    vessels[actingVessel].defenses+=4
 
+  if orders == 7:
+    print("\n1. Energy Weapons\n2. Torpedoes\n3. Scanners\n4. Engines")
+    orders = eval(input("\nEnhance which system? "))
+    if orders == 1:
+      vessels[actingVessel].enAttackMod = 15
+    elif orders == 2:
+      vessels[actingVessel].torpAttackMod = 15
+    elif orders == 3:
+      vessels[actingVessel].enAttackMod += 2
+      vessels[actingVessel].torpAttackMod += 2
+    elif orders == 4:
+      vessels[actingVessel].turn += 1
+      vessels[actingVessel].impulse += .1
 
 def oblivion(lost):
   lostName = vessels[lost].name
@@ -81,9 +94,14 @@ actingVessel = 0
 while battle_continue == True:
 
   turn(actingVessel)
+  
+  
+  #need to debuff enhancements upon vessel's next turn
 
-  #if vessels[0] <= 0
-   # battle_continue = False
+
+  if len(vessels[0]) <= 1:
+    battle_continue = False
+    print("The",vessels[0],"has won the fight!")
 
   actingVessel += 1
   if actingVessel >=2:
