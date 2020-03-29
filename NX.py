@@ -8,37 +8,40 @@ vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.S
 
 ###########################################################################
 
+def listAndTarget():
+  print("")
+  length = len(vessels)    
+  for i in range(length): 
+    if vessels[i].hull > 0 and i != actingVessel:
+      print(i,""+vessels[i].name) 
+  pewpew = eval(input("Who are we targeting? "))
+  return vessels[pewpew]
+
 def turn(actingVessel):
   print("\nThe bridge of the",vessels[actingVessel].name,"is yours.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Enhance System")
   orders = eval(input("\nYour orders? "))
 
   if orders == 1 or orders == 2:
-    print("")
-    length = len(vessels)    
-    for i in range(length): 
-      if vessels[i].hull > 0 and i != actingVessel:
-        print(i,""+vessels[i].name) 
-    pewpew = eval(input("Who are we firing at? "))
-    target = vessels[pewpew]
-    print("Target's defenses are: ",vessels[pewpew].defenses)
+    target = listAndTarget()
+    print("Target's defenses are: ",target.defenses)
 
     if orders == 1:
-      damage = vessels[actingVessel].energy() - defenses
+      damage = vessels[actingVessel].energy() - target.defenses
       if damage < 0:
         damage = 0
       target.hull = (target.hull - damage)
       print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
       if target.hull <= 0:
-        oblivion(pewpew)
+        oblivion(target)
 
     if orders == 2:
-      damage = vessels[actingVessel].torpedo() - defenses
+      damage = vessels[actingVessel].torpedo() - target.defenses
       target.hull = (target.hull - damage)
       print("The "+target.name+" took",damage,"damage.")
       #print(target.hull)
       if target.hull <= 0:
-        oblivion(pewpew)
+        oblivion(target)
 
   if orders == 3:
   	#print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
@@ -53,6 +56,15 @@ def turn(actingVessel):
     print("Engines are at",vessels[actingVessel].impulse)
     print("Our defensive rating is",vessels[actingVessel].defenses)
 
+  if orders == 5:
+    subject = listAndTarget()
+    print("Their hull is at",subject.hull)
+    print("Their energy weapons are",subject.energyStatus)
+    print("Their torpedoes are",subject.torpedoStatus)
+    print("Their maneuverability is at",subject.turn)
+    print("Their engines are at",subject.impulse)
+    print("Their defensive rating is",subject.defenses)
+  
   if orders == 6:
     vessels[actingVessel].defenses+=2
 
