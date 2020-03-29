@@ -1,33 +1,33 @@
 import random
 
 class Miranda:
-  def __init__(self, name, hull, shield, turn, impulse, attack_choice):
+  def __init__(self, name):
     self.name = name
-    self.hull = hull
-    self.hullMax = hull
-    self.shield = shield
-    self.shieldMax = shield
+    self.hull = 10000
+    self.hullMax = 10000
+    self.shield = 1
+    self.shieldMax = 1
     self.shieldStatus="Online"
-    self.turn = turn
-    self.impulse = impulse
-    self.engineMax = turn + impulse
-    self.__attack_choice = attack_choice
+    self.turn = 11.4
+    self.impulse = .2
+    self.engineMax = 11.6 #turn + impulse
+    #self.__attack_choice = attack_choice
     self.energyStatus="Online"
     self.enAttackMod=0
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.defenses = (self.turn * .5) + (self.impulse * 10) + (self.shield * 10)
+    self.defenses = (self.turn * 2) + (self.impulse * 10) + (self.shield * 100)
 
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
 
   def energy(self):
     print("Firing phasers.")
-    attack_points = random.randint(50,150) + self.enAttackMod
+    attack_points = random.randint(500,1500) + self.enAttackMod
     return attack_points
   def torpedo(self):
     print("Torpedoes away.")
-    attack_points = random.randint(75,200) + self.torpAttackMod
+    attack_points = random.randint(750,2000) + self.torpAttackMod
     return attack_points
 
   def heal(self,sys):
@@ -47,41 +47,39 @@ class Miranda:
 # print(p2)
 
 class Saber:
-  def __init__(self, name, hull, shield, turn, impulse, attack_choice):
+  def __init__(self, name):
     self.name = name
-    self.hull = hull
-    self.hullMax = hull
-    self.shield = shield
-    self.shieldOriginal = shield
+    self.hull = 15000
+    self.hullMax = 15000
+    self.shield = .9
+    self.shieldMax = .9
     self.shieldStatus="Online"
-    self.turn = turn
-    self.turnOriginal = turn
-    self.impulse = impulse
-    self.impulseOriginal = impulse
-    self.engineMax = turn + impulse
-    self.__attack_choice = attack_choice
+    self.turn = 17
+    self.impulse = .2
+    self.engineMax = 17.2 #turn + impulse
+    #self.__attack_choice = attack_choice
     self.energyStatus="Online"
     self.enAttackMod=0
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.defenses = (self.turn * .5) + (self.impulse * 10) + (self.shield * 10)
+    self.defenses = (self.turn * 2) + (self.impulse * 10) + (self.shield * 100)
 
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
 
   def energy(self):
     print("\nFiring phasers.")
-    attack_points = random.randint(50,150) + self.enAttackMod
+    attack_points = random.randint(500,1500) + self.enAttackMod
     return attack_points
   def torpedo(self):
     print("\nTorpedoes away.")
-    attack_points = random.randint(75,200) + self.torpAttackMod
+    attack_points = random.randint(750,2000) + self.torpAttackMod
     return attack_points
 
   def heal(self,sys):
       #if sys==1: 
       #elif sys == 5:
-      heal_points = random.randint(25,50)
+      heal_points = random.randint(250,500)
       if self.hullMax > self.hull:
         self.hull+=heal_points
         print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)

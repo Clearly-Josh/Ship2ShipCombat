@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)]
+vessels = [Vessels.Miranda("USS Robert Scott"), Vessels.Saber("USS Skirata")]
 
 ###########################################################################
 
@@ -46,21 +46,21 @@ def turn(actingVessel):
     if orders == 1 or orders == 2:
       target = listAndTarget()
       print("Target's defenses are: ",target.defenses)
-      precision = eval(input("Target 1. Their Hull or 2. A System? "))
+      precision = eval(input("\nTarget 1. Their Hull or 2. A System? "))
       if precision == 2:
         targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
         if enOffline == 1 or torpOffline == 1 or shieldOffline == 1:
           if targetSys == 1:
             print("Their energy weapons are down!")
-            target.energyStatus = "Offline"
+            target.energyStatus = "**Offline**"
             target.enAttackMod = -1000
           elif targetSys == 2:
             print("Their torpedoes are down!")
-            target.torpedoStatus = "Offline"
+            target.torpedoStatus = "**Offline**"
             target.torpAttackMod = -1000
           elif targetSys == 3:
             print("Their shields are down!")
-            target.shieldStatus = "Offline"
+            target.shieldStatus = "**Offline**"
             target.shield = 0
         elif enOffline == 0 or torpOffline == 0 or shieldOffline == 0:
           print("Target hit! One more ought to take it out.")
@@ -76,7 +76,7 @@ def turn(actingVessel):
           target.impulse -= .1
       else:
         if orders == 1:
-          if vessels[actingVessel].energyStatus == "Offline":
+          if vessels[actingVessel].energyStatus == "**Offline**":
             print("We can't fire!")
             officersActed -= 1
           else:
@@ -84,7 +84,6 @@ def turn(actingVessel):
               print("That's as fast as they can fire, sir.")
               officersActed -= 1
             else:
-              time.sleep(1)
               damage = vessels[actingVessel].energy() - target.defenses
               if damage < 0:
                 damage = 0
@@ -98,7 +97,7 @@ def turn(actingVessel):
               oneDone += 1
 
         if orders == 2:
-          if vessels[actingVessel].torpedoStatus == "Offline":
+          if vessels[actingVessel].torpedoStatus == "**Offline**":
             print("The launchers are inoperable, sir!")
             officersActed -= 1
           else:
@@ -106,7 +105,6 @@ def turn(actingVessel):
               print("We need a few more seconds to reload, sir!")
               officersActed -= 1
             else:
-              time.sleep(1)
               damage = vessels[actingVessel].torpedo() - target.defenses
               target.hull = (target.hull - damage)
               time.sleep(1)
@@ -234,9 +232,11 @@ while battle_continue == True:
     #battle_continue = False
   
   print("\nTurn ended.\nReadying the",vessels[actingVessel].name)
+  time.sleep(1)
   print("...")
-  time.sleep(2)
+  time.sleep(1)
   print("..")
-  time.sleep(2)
+  time.sleep(1)
   print(".")
   time.sleep(1)
+  print("\n------------------------------------------------------------------\n")
