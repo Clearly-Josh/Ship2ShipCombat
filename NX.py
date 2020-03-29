@@ -2,9 +2,9 @@
 
 import random
 import Vessels
+import time
 
 vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)]
-#v1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
 
 ###########################################################################
 
@@ -43,69 +43,106 @@ def turn(actingVessel):
       target = listAndTarget()
       print("Target's defenses are: ",target.defenses)
 
-      if orders == 1 and oneDone <= 1:
-        damage = vessels[actingVessel].energy() - target.defenses
-        if damage < 0:
-          damage = 0
-        target.hull = (target.hull - damage)
-        print("The "+target.name+" took",damage,"damage.")
-        #print(target.hull)
-        if target.hull <= 0:
-          oblivion(target)
-        oneDone += 1
-
-      if orders == 2 and twoDone <= 1:
-        damage = vessels[actingVessel].torpedo() - target.defenses
-        target.hull = (target.hull - damage)
-        print("The "+target.name+" took",damage,"damage.")
-        #print(target.hull)
-        if target.hull <= 0:
-          oblivion(target)
-        twoDone += 1
-
-    if orders == 3 and threeDone <=1:
-      #print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
-      #orders = eval(input("\nYour orders? "))
-      heal_self = vessels[actingVessel].heal(orders)
-      threeDone += 1
-      
-    if orders == 4 and fourDone <= 1:
-      print("The hull is at",vessels[actingVessel].hull)
-      print("Energy weapons are",vessels[actingVessel].energyStatus)
-      print("Torpedoes are",vessels[actingVessel].torpedoStatus)
-      print("Maneuverability is at",vessels[actingVessel].turn)
-      print("Engines are at",vessels[actingVessel].impulse)
-      print("Our defensive rating is",vessels[actingVessel].defenses)
-      fourDone += 1
-
-    if orders == 5 and fiveDone <= 1:
-      subject = listAndTarget()
-      print("Their hull is at",subject.hull)
-      print("Their energy weapons are",subject.energyStatus)
-      print("Their torpedoes are",subject.torpedoStatus)
-      print("Their maneuverability is at",subject.turn)
-      print("Their engines are at",subject.impulse)
-      print("Their defensive rating is",subject.defenses)
-      fiveDone += 1
-    
-    if orders == 6 and sixDone <= 0:
-      vessels[actingVessel].defenses+=4
-      sixDone += 1
-
-    if orders == 7 and sevenDone <= 1:
-      print("\n1. Energy Weapons\n2. Torpedoes\n3. Scanners\n4. Engines")
-      orders = eval(input("\nEnhance which system? "))
       if orders == 1:
-        vessels[actingVessel].enAttackMod = 15
-      elif orders == 2:
-        vessels[actingVessel].torpAttackMod = 15
-      elif orders == 3:
-        vessels[actingVessel].enAttackMod += 2
-        vessels[actingVessel].torpAttackMod += 2
-      elif orders == 4:
-        vessels[actingVessel].turn += 1
-        vessels[actingVessel].impulse += .1
-      sevenDone += 1
+        if oneDone > 1:
+          print("That's as fast as they can fire, sir.")
+          officersActed -= 1
+        else:
+          time.sleep(1)
+          damage = vessels[actingVessel].energy() - target.defenses
+          if damage < 0:
+            damage = 0
+          target.hull = (target.hull - damage)
+          time.sleep(1)
+          print("The "+target.name+" took",damage,"damage.")
+          time.sleep(1)
+          #print(target.hull)
+          if target.hull <= 0:
+            oblivion(target)
+          oneDone += 1
+
+      if orders == 2:
+        if twoDone > 1:
+          print("We need a few more seconds to reload, sir!")
+          officersActed -= 1
+        else:
+          time.sleep(1)
+          damage = vessels[actingVessel].torpedo() - target.defenses
+          target.hull = (target.hull - damage)
+          time.sleep(1)
+          print("The "+target.name+" took",damage,"damage.")
+          time.sleep(1)
+          #print(target.hull)
+          if target.hull <= 0:
+            oblivion(target)
+          twoDone += 1
+
+    if orders == 3:
+      if threeDone > 1:
+        print("That's all we can do short of pulling into drydock.")
+        officersActed -= 1
+      else:
+        #print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
+        #orders = eval(input("\nYour orders? "))
+        heal_self = vessels[actingVessel].heal(orders)
+        time.sleep(2)
+        threeDone += 1
+      
+    if orders == 4:
+      if fourDone > 1:
+        print("The ship'll be fine! Your attention is needed elsewhere!")
+        officersActed -= 1
+      else:
+        print("The hull is at",vessels[actingVessel].hull)
+        print("Energy weapons are",vessels[actingVessel].energyStatus)
+        print("Torpedoes are",vessels[actingVessel].torpedoStatus)
+        print("Maneuverability is at",vessels[actingVessel].turn)
+        print("Engines are at",vessels[actingVessel].impulse)
+        print("Our defensive rating is",vessels[actingVessel].defenses)
+        time.sleep(4)
+        fourDone += 1
+      
+    if orders == 5:
+      if fiveDone > 1:
+        print("We won't learn anything new from another scan.")
+        officersActed -= 1
+      else:
+        subject = listAndTarget()
+        print("Their hull is at",subject.hull)
+        print("Their energy weapons are",subject.energyStatus)
+        print("Their torpedoes are",subject.torpedoStatus)
+        print("Their maneuverability is at",subject.turn)
+        print("Their engines are at",subject.impulse)
+        print("Their defensive rating is",subject.defenses)
+        time.sleep(4)
+        fiveDone += 1
+    
+    if orders == 6:
+      if sixDone > 0:
+        print("We're already engaged in evasive maneuvers.")
+        officersActed -= 1
+      else:
+        vessels[actingVessel].defenses+=4
+        sixDone += 1
+
+    if orders == 7:
+      if sevenDone > 1:
+        print("We've enhanced her all we could right now.")
+        officersActed -= 1
+      else:
+        print("\n1. Energy Weapons\n2. Torpedoes\n3. Scanners\n4. Engines")
+        orders = eval(input("\nEnhance which system? "))
+        if orders == 1:
+          vessels[actingVessel].enAttackMod = 15
+        elif orders == 2:
+          vessels[actingVessel].torpAttackMod = 15
+        elif orders == 3:
+          vessels[actingVessel].enAttackMod += 2
+          vessels[actingVessel].torpAttackMod += 2
+        elif orders == 4:
+          vessels[actingVessel].turn += 1
+          vessels[actingVessel].impulse += .1
+        sevenDone += 1
     
     officersActed += 1
 
@@ -130,3 +167,11 @@ while battle_continue == True:
   if actingVessel >=2:
     actingVessel = 0
     #battle_continue = False
+  
+  print("\nTurn ended.\nReadying the",vessels[actingVessel].name)
+  print("...")
+  time.sleep(2)
+  print("..")
+  time.sleep(2)
+  print(".")
+  time.sleep(1)
