@@ -78,6 +78,7 @@ def turn(actingVessel):
         if orders == 1:
           if vessels[actingVessel].energyStatus == "Offline":
             print("We can't fire!")
+            officersActed -= 1
           else:
             if oneDone > 1:
               print("That's as fast as they can fire, sir.")
@@ -99,6 +100,7 @@ def turn(actingVessel):
         if orders == 2:
           if vessels[actingVessel].torpedoStatus == "Offline":
             print("The launchers are inoperable, sir!")
+            officersActed -= 1
           else:
             if twoDone > 1:
               print("We need a few more seconds to reload, sir!")
@@ -123,6 +125,7 @@ def turn(actingVessel):
         precision = eval(input("Repair 1. Our Hull or 2. A System? "))
         if precision == 2:
           targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
+
           if targetSys == 1:
             print("The energy weapons are back up!")
             vessels[actingVessel].energyStatus = "Online"
@@ -156,6 +159,7 @@ def turn(actingVessel):
         print("The hull is at",vessels[actingVessel].hull)
         print("Energy weapons are",vessels[actingVessel].energyStatus)
         print("Torpedoes are",vessels[actingVessel].torpedoStatus)
+        print("Shields are",vessels[actingVessel].shieldStatus)
         print("Maneuverability is at",vessels[actingVessel].turn)
         print("Engines are at",vessels[actingVessel].impulse)
         print("Our defensive rating is",vessels[actingVessel].defenses)
@@ -171,6 +175,7 @@ def turn(actingVessel):
         print("Their hull is at",subject.hull)
         print("Their energy weapons are",subject.energyStatus)
         print("Their torpedoes are",subject.torpedoStatus)
+        print("Their shields are",subject.shieldStatus)
         print("Their maneuverability is at",subject.turn)
         print("Their engines are at",subject.impulse)
         print("Their defensive rating is",subject.defenses)
