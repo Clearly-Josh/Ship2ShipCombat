@@ -5,21 +5,11 @@ import Vessels
 
 vessels = [Vessels.Miranda("USS Robert Scott", 10000, 1, 11.4, .2, 1), Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)]
 #v1 = Vessels.Miranda("USS Robert Scott", 10000, 1)
-#v2 = Vessels.Saber("USS Skirata", 15000, .9, 17, .2, 1)
-
-#class test statements
-#p1.displayShipName()
-#pa=p1.attack()
-#print(pa)
-#p2.displayShipName()
-#pa=p2.attack()
-#print(pa)
-#print(p2.hull)
 
 ###########################################################################
 
 def turn(actingVessel):
-  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Prioritze System")
+  print("\nThe bridge is yours, Captain.\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Enhance System")
   orders = eval(input("\nYour orders? "))
 
   if orders == 1 or orders == 2:
@@ -59,7 +49,7 @@ def turn(actingVessel):
   	print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
   	orders = eval(input("\nYour orders? "))
   	heal_self = vessels[actingVessel].heal(orders)
-  	#print("You healed",heal_self,"health points.")
+  	
 
 def oblivion(lost):
   lostName = vessels[lost].name

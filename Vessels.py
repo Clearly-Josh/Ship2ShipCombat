@@ -8,6 +8,7 @@ class Miranda:
     self.turn = turn
     self.impulse = impulse
     self.__attack_choice = attack_choice
+    #self.energyStat=
 
   def displayShipName(self):
     print("These are the voyages of the " + self.name)
@@ -21,10 +22,12 @@ class Miranda:
     attack_points = random.randint(25,50)
     return attack_points
 
-  def heal(self):
-
+  def heal(self,sys):
+      #if sys==1: 
+      #elif sys == 5:
       heal_points = random.randint(18,25)
-      return heal_points
+      self.hull+=heal_points
+      print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)
   
 #tests for Mirand class
 # p1 = Miranda("USS Robert Scott", 10000, 1)
