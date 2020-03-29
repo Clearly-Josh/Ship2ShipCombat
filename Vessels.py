@@ -83,3 +83,42 @@ class Saber:
       if self.hullMax > self.hull:
         self.hull+=heal_points
         print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)
+
+
+class Nova:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 13500
+    self.hullMax = 13500
+    self.shield = 1.3
+    self.shieldMax = 1.3
+    self.shieldStatus="Online"
+    self.turn = 14
+    self.impulse = .15
+    self.engineMax = 14.15 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.defenses = (self.turn * 2) + (self.impulse * 10) + (self.shield * 100)
+
+  def displayShipName(self):
+    print("These are the voyages of the " + self.name)
+
+  def energy(self):
+    print("\nFiring phasers.")
+    attack_points = random.randint(500,1500) + self.enAttackMod
+    return attack_points
+  def torpedo(self):
+    print("\nTorpedoes away.")
+    attack_points = random.randint(750,2000) + self.torpAttackMod
+    return attack_points
+
+  def heal(self,sys):
+      #if sys==1: 
+      #elif sys == 5:
+      heal_points = random.randint(250,500)
+      if self.hullMax > self.hull:
+        self.hull+=heal_points
+        print("You repaired",heal_points,"hull points.\nYour hull is at",self.hull)

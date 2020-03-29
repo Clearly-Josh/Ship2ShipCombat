@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.Miranda("USS Robert Scott"), Vessels.Saber("USS Skirata")]
+vessels = [Vessels.Miranda("USS Robert Scott"), Vessels.Saber("USS Skirata"), Vessels.Nova("USS Gates")]
 
 ###########################################################################
 
@@ -48,6 +48,10 @@ def turn(actingVessel):
       print("Target's defenses are: ",target.defenses)
       precision = eval(input("\nTarget 1. Their Hull or 2. A System? "))
       if precision == 2:
+        if orders == 1:
+          oneDone += 1
+        if orders == 2:
+          twoDone += 1
         targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
         if enOffline == 1 or torpOffline == 1 or shieldOffline == 1:
           if targetSys == 1:
@@ -63,57 +67,56 @@ def turn(actingVessel):
             target.shieldStatus = "**Offline**"
             target.shield = 0
         elif enOffline == 0 or torpOffline == 0 or shieldOffline == 0:
-          print("Target hit! One more ought to take it out.")
-          if targetSys == 1:
-            enOffline += 1
-          elif targetSys == 2:
-            torpOffline += 1
-          elif targetSys == 3:
-            shieldOffline += 1
-        elif targetSys == 4:
-          print("Their engines have been damaged.")
-          target.turn -= 2
-          target.impulse -= .1
+          if targetSys == 4:
+            print("Their engines have been damaged.")
+            target.turn -= 2
+            target.impulse -= .1
+          else:
+            print("Target hit! One more ought to take it out.")
+            if targetSys == 1:
+              enOffline += 1
+            elif targetSys == 2:
+              torpOffline += 1
+            elif targetSys == 3:
+              shieldOffline += 1
       else:
         if orders == 1:
           if vessels[actingVessel].energyStatus == "**Offline**":
             print("We can't fire!")
             officersActed -= 1
-          else:
-            if oneDone > 1:
+          elif oneDone > 1:
               print("That's as fast as they can fire, sir.")
               officersActed -= 1
-            else:
-              damage = vessels[actingVessel].energy() - target.defenses
-              if damage < 0:
-                damage = 0
-              target.hull = (target.hull - damage)
-              time.sleep(1)
-              print("The "+target.name+" took",damage,"damage.")
-              time.sleep(1)
-              #print(target.hull)
-              if target.hull <= 0:
-                oblivion(target)
-              oneDone += 1
+          else:
+            damage = vessels[actingVessel].energy() - target.defenses
+            if damage < 0:
+              damage = 0
+            target.hull = (target.hull - damage)
+            time.sleep(1)
+            print("The "+target.name+" took",damage,"damage.")
+            time.sleep(1)
+            #print(target.hull)
+            if target.hull <= 0:
+              oblivion(target)
+            oneDone += 1
 
         if orders == 2:
           if vessels[actingVessel].torpedoStatus == "**Offline**":
             print("The launchers are inoperable, sir!")
             officersActed -= 1
+          elif twoDone > 1:
+            print("We need a few more seconds to reload, sir!")
+            officersActed -= 1
           else:
-            if twoDone > 1:
-              print("We need a few more seconds to reload, sir!")
-              officersActed -= 1
-            else:
-              damage = vessels[actingVessel].torpedo() - target.defenses
-              target.hull = (target.hull - damage)
-              time.sleep(1)
-              print("The "+target.name+" took",damage,"damage.")
-              time.sleep(1)
-              #print(target.hull)
-              if target.hull <= 0:
-                oblivion(target)
-              twoDone += 1
+            damage = vessels[actingVessel].torpedo() - target.defenses
+            target.hull = (target.hull - damage)
+            time.sleep(1)
+            print("The "+target.name+" took",damage,"damage.")
+            time.sleep(1)
+            #print(target.hull)
+            if target.hull <= 0:
+              oblivion(target)
+            twoDone += 1
 
     if orders == 3:
       if threeDone > 1:
@@ -227,7 +230,7 @@ while battle_continue == True:
     print("The",vessels[0],"has won the fight!")
 
   actingVessel += 1
-  if actingVessel >=2:
+  if actingVessel >= len(vessels):
     actingVessel = 0
     #battle_continue = False
   
