@@ -46,7 +46,7 @@ def turn(actingVessel):
     if orders == 1 or orders == 2:
       target = listAndTarget()
       print("Target's defenses are: ",target.defenses)
-      precision = eval(input("Target their 1. Hull or a 2. System? "))
+      precision = eval(input("Target 1. Their Hull or 2. A System? "))
       if precision == 2:
         targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
         if enOffline == 1 or torpOffline == 1 or shieldOffline == 1:
@@ -76,49 +76,77 @@ def turn(actingVessel):
           target.impulse -= .1
       else:
         if orders == 1:
-          if oneDone > 1:
-            print("That's as fast as they can fire, sir.")
-            officersActed -= 1
+          if vessels[actingVessel].energyStatus == "Offline":
+            print("We can't fire!")
           else:
-            time.sleep(1)
-            damage = vessels[actingVessel].energy() - target.defenses
-            if damage < 0:
-              damage = 0
-            target.hull = (target.hull - damage)
-            time.sleep(1)
-            print("The "+target.name+" took",damage,"damage.")
-            time.sleep(1)
-            #print(target.hull)
-            if target.hull <= 0:
-              oblivion(target)
-            oneDone += 1
+            if oneDone > 1:
+              print("That's as fast as they can fire, sir.")
+              officersActed -= 1
+            else:
+              time.sleep(1)
+              damage = vessels[actingVessel].energy() - target.defenses
+              if damage < 0:
+                damage = 0
+              target.hull = (target.hull - damage)
+              time.sleep(1)
+              print("The "+target.name+" took",damage,"damage.")
+              time.sleep(1)
+              #print(target.hull)
+              if target.hull <= 0:
+                oblivion(target)
+              oneDone += 1
 
         if orders == 2:
-          if twoDone > 1:
-            print("We need a few more seconds to reload, sir!")
-            officersActed -= 1
+          if vessels[actingVessel].torpedoStatus == "Offline":
+            print("The launchers are inoperable, sir!")
           else:
-            time.sleep(1)
-            damage = vessels[actingVessel].torpedo() - target.defenses
-            target.hull = (target.hull - damage)
-            time.sleep(1)
-            print("The "+target.name+" took",damage,"damage.")
-            time.sleep(1)
-            #print(target.hull)
-            if target.hull <= 0:
-              oblivion(target)
-            twoDone += 1
+            if twoDone > 1:
+              print("We need a few more seconds to reload, sir!")
+              officersActed -= 1
+            else:
+              time.sleep(1)
+              damage = vessels[actingVessel].torpedo() - target.defenses
+              target.hull = (target.hull - damage)
+              time.sleep(1)
+              print("The "+target.name+" took",damage,"damage.")
+              time.sleep(1)
+              #print(target.hull)
+              if target.hull <= 0:
+                oblivion(target)
+              twoDone += 1
 
     if orders == 3:
       if threeDone > 1:
         print("That's all we can do short of pulling into drydock.")
         officersActed -= 1
       else:
-        #print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
-        #orders = eval(input("\nYour orders? "))
-        heal_self = vessels[actingVessel].heal(orders)
-        time.sleep(2)
-        threeDone += 1
+        precision = eval(input("Repair 1. Our Hull or 2. A System? "))
+        if precision == 2:
+          targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
+          if targetSys == 1:
+            print("The energy weapons are back up!")
+            vessels[actingVessel].energyStatus = "Online"
+            vessels[actingVessel].enAttackMod = 0
+          elif targetSys == 2:
+            print("We have torpedoes!")
+            vessels[actingVessel].torpedoStatus = "Online"
+            vessels[actingVessel].torpAttackMod = 0
+          elif targetSys == 3:
+            print("Shields are back!")
+            vessels[actingVessel].shieldStatus = "Online"
+            vessels[actingVessel].shield = vessels[actingVessel].shieldMax
+          elif targetSys == 4:
+            print("We're moving again.")
+            vessels[actingVessel].turn += 2
+            vessels[actingVessel].impulse += .1
+          time.sleep(2)
+          threeDone += 1
+        else:
+          #print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
+          #orders = eval(input("\nYour orders? "))
+          heal_self = vessels[actingVessel].heal(orders)
+          time.sleep(2)
+          threeDone += 1
       
     if orders == 4:
       if fourDone > 1:

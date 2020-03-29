@@ -6,6 +6,7 @@ class Miranda:
     self.hull = hull
     self.hullMax = hull
     self.shield = shield
+    self.shieldMax = shield
     self.shieldStatus="Online"
     self.turn = turn
     self.impulse = impulse
