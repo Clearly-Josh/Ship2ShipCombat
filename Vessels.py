@@ -1,5 +1,13 @@
 import random
 
+def calcDefenses(ship2Calc):
+  ship2Calc.defenses = (ship2Calc.turn * 2) + (ship2Calc.impulse * 10) + (ship2Calc.shield * 100) + ship2Calc.maneuverBonus
+  print("Our vessel's defense rating is now",ship2Calc.defenses)
+  return ship2Calc.defenses
+
+def displayShipName(self):
+  print("These are the voyages of the " + self.name)
+
 class Miranda:
   def __init__(self, name):
     self.name = name
@@ -16,10 +24,8 @@ class Miranda:
     self.enAttackMod=0
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.defenses = (self.turn * 2) + (self.impulse * 10) + (self.shield * 100)
-
-  def displayShipName(self):
-    print("These are the voyages of the " + self.name)
+    self.defenses = 0
+    self.maneuverBonus = 0
 
   def energy(self):
     print("Firing phasers.")
@@ -62,10 +68,8 @@ class Saber:
     self.enAttackMod=0
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.defenses = (self.turn * 2) + (self.impulse * 10) + (self.shield * 100)
-
-  def displayShipName(self):
-    print("These are the voyages of the " + self.name)
+    self.defenses = 0
+    self.maneuverBonus = 0
 
   def energy(self):
     print("\nFiring phasers.")
@@ -101,10 +105,8 @@ class Nova:
     self.enAttackMod=0
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.defenses = (self.turn * 2) + (self.impulse * 10) + (self.shield * 100)
-
-  def displayShipName(self):
-    print("These are the voyages of the " + self.name)
+    self.defenses = 0
+    self.maneuverBonus = 0
 
   def energy(self):
     print("\nFiring phasers.")

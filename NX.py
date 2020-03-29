@@ -5,6 +5,10 @@ import Vessels
 import time
 
 vessels = [Vessels.Miranda("USS Robert Scott"), Vessels.Saber("USS Skirata"), Vessels.Nova("USS Gates")]
+# calculate everybody's initial defensive rating
+length = len(vessels)    
+for i in range(length):
+  vessels[i].defenses = Vessels.calcDefenses(vessels[i])
 
 ###########################################################################
 
@@ -51,7 +55,7 @@ def turn(actingVessel):
         if orders == 1:
           oneDone += 1
         if orders == 2:
-          twoDone += 1
+          twoDone += 2
         targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
         if enOffline == 1 or torpOffline == 1 or shieldOffline == 1:
           if targetSys == 1:
@@ -116,7 +120,7 @@ def turn(actingVessel):
             #print(target.hull)
             if target.hull <= 0:
               oblivion(target)
-            twoDone += 1
+            twoDone += 2
 
     if orders == 3:
       if threeDone > 1:
@@ -188,7 +192,8 @@ def turn(actingVessel):
         print("We're already engaged in evasive maneuvers.")
         officersActed -= 1
       else:
-        vessels[actingVessel].defenses+=4
+        vessels[actingVessel].maneuverBonus = 40
+        Vessels.calcDefenses(vessels[actingVessel])
         sixDone += 1
 
     if orders == 7:
@@ -199,15 +204,16 @@ def turn(actingVessel):
         print("\n1. Energy Weapons\n2. Torpedoes\n3. Scanners\n4. Engines")
         orders = eval(input("\nEnhance which system? "))
         if orders == 1:
-          vessels[actingVessel].enAttackMod = 15
+          vessels[actingVessel].enAttackMod = 100
         elif orders == 2:
-          vessels[actingVessel].torpAttackMod = 15
+          vessels[actingVessel].torpAttackMod = 120
         elif orders == 3:
-          vessels[actingVessel].enAttackMod += 2
-          vessels[actingVessel].torpAttackMod += 2
+          vessels[actingVessel].enAttackMod += 50
+          vessels[actingVessel].torpAttackMod += 50
         elif orders == 4:
-          vessels[actingVessel].turn += 1
+          vessels[actingVessel].turn += 3
           vessels[actingVessel].impulse += .1
+          Vessels.calcDefenses(vessels[actingVessel])
         sevenDone += 1
     
     officersActed += 1
