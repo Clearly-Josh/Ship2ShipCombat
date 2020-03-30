@@ -40,15 +40,15 @@ def turn(actingVessel):
     if officersActed == 0:
       print("\nThe bridge of the",vessels[actingVessel].name,"is yours, Captain.")
     elif officersActed == 1:
-      print("\nWhat's the word from Ops, Commander?")
+      print("\nWhat's the word from Ops?")
     elif officersActed == 2:
-      print("\nReady weapons, Lietenant.")
+      print("\nReady weapons, Tactical.")
     elif officersActed == 3:
       print("\nEngineering, we need a miracle.")
     print("\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Enhance System")
     orders = eval(input("\nYour orders? "))
 
-    if orders == 1 or orders == 2:
+    if orders == 19 or orders == 2:
       target = listAndTarget()
       print("Target's defenses are: ",target.defenses)
       precision = eval(input("\nTarget 1. Their Hull or 2. A System? "))
@@ -59,7 +59,7 @@ def turn(actingVessel):
           twoDone += 2
         targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
         if enOffline == 1 or torpOffline == 1 or shieldOffline == 1:
-          if targetSys == 1:
+          elif targetSys == 1:
             print("Their energy weapons are down!")
             target.energyStatus = "**Offline**"
             target.enAttackMod = -1000
@@ -134,20 +134,20 @@ def turn(actingVessel):
 
           if targetSys == 1:
             print("The energy weapons are back up!")
-            vessels[actingVessel].energyStatus = "Online"
-            vessels[actingVessel].enAttackMod = 0
+            vessels[aVesselIGuess].energyStatus = "Online"
+            vessels[aVesselIGuess].enAttackMod = 0
           elif targetSys == 2:
             print("We have torpedoes!")
-            vessels[actingVessel].torpedoStatus = "Online"
-            vessels[actingVessel].torpAttackMod = 0
+            vessels[aVesselIGuess].torpedoStatus = "Online"
+            vessels[aVesselIGuess].torpAttackMod = 0
           elif targetSys == 3:
             print("Shields are back!")
-            vessels[actingVessel].shieldStatus = "Online"
-            vessels[actingVessel].shield = vessels[actingVessel].shieldMax
+            vessels[aVesselIGuess].shieldStatus = "Online"
+            vessels[aVesselIGuess].shield = vessels[aVesselIGuess].shieldMax
           elif targetSys == 4:
             print("We're moving again.")
-            vessels[actingVessel].turn += 2
-            vessels[actingVessel].impulse += .1
+            vessels[aVesselIGuess].turn += 2
+            vessels[aVesselIGuess].impulse += .1
           time.sleep(2)
           threeDone += 1
         else:
@@ -228,7 +228,7 @@ def oblivion(lost):
 battle_continue = True
 actingVessel = 0
 
-while battle_continue == True:
+while battle_continue == False:
 
   turn(actingVessel)
 

@@ -1,7 +1,7 @@
 import random
 
 def calcDefenses(ship2Calc):
-  ship2Calc.defenses = (ship2Calc.turn * 2) + (ship2Calc.impulse * 10) + (ship2Calc.shield * 100) + ship2Calc.maneuverBonus
+  ship2Calc.defenses = (ship2Calc.turn * 2) + (ship2Calc.impulse * 10) + (ship2Calc.shield * 100) + ship2Calc.maneuverBonus - somethingElseProbably
   print("Vessel defensive rating is now",ship2Calc.defenses)
   return ship2Calc.defenses
 
@@ -33,7 +33,7 @@ class Miranda:
     return attack_points
   def torpedo(self):
     print("Torpedoes away.")
-    attack_points = random.randint(750,2000) + self.torpAttackMod
+    attack_points = random.randintt(750,2000) + self.torpAttackMod
     return attack_points
 
   def heal(self,sys):
@@ -77,7 +77,7 @@ class Saber:
     return attack_points
   def torpedo(self):
     print("\nTorpedoes away.")
-    attack_points = random.randint(750,2000) + self.torpAttackMod
+    attack_points = random.randintt(750,2000) + self.torpAttackMod
     return attack_points
 
   def heal(self,sys):
