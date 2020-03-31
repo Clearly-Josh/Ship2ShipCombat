@@ -40,15 +40,15 @@ def turn(actingVessel):
     if officersActed == 0:
       print("\nThe bridge of the",vessels[actingVessel].name,"is yours, Captain.")
     elif officersActed == 1:
-      print("\nWhat's the word from Ops?")
+      print("\nWhat's the word from Ops, Commander?")
     elif officersActed == 2:
-      print("\nReady weapons, Tactical.")
+      print("\nReady weapons, Lietenant.")
     elif officersActed == 3:
       print("\nEngineering, we need a miracle.")
     print("\n1. Fire Energy Weapons\n2. Launch Torpedoes\n3. Commence Repairs\n4. Status Report\n5. Scan a Vessel\n6. Maneuver\n7. Enhance System")
     orders = eval(input("\nYour orders? "))
 
-    if orders == 19 or orders == 2:
+    if orders == 1 or orders == 2:
       target = listAndTarget()
       print("Target's defenses are: ",target.defenses)
       precision = eval(input("\nTarget 1. Their Hull or 2. A System? "))
@@ -59,7 +59,7 @@ def turn(actingVessel):
           twoDone += 2
         targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
         if enOffline == 1 or torpOffline == 1 or shieldOffline == 1:
-          elif targetSys == 1:
+          if targetSys == 1:
             print("Their energy weapons are down!")
             target.energyStatus = "**Offline**"
             target.enAttackMod = -1000
@@ -93,7 +93,8 @@ def turn(actingVessel):
               print("That's as fast as they can fire, sir.")
               officersActed -= 1
           else:
-            damage = vessels[actingVessel].energy() - target.defenses
+            print("Firing.")
+            damage = random.randint(vessels[actingVessel].enBase,vessels[actingVessel].enMax) + vessels[actingVessel].enAttackMod - target.defenses
             if damage < 0:
               damage = 0
             target.hull = (target.hull - damage)
@@ -113,7 +114,8 @@ def turn(actingVessel):
             print("We need a few more seconds to reload, sir!")
             officersActed -= 1
           else:
-            damage = vessels[actingVessel].torpedo() - target.defenses
+            print("Torpedoes away.")
+            damage = random.randint(vessels[actingVessel].torpBase,vessels[actingVessel].torpMax) + vessels[actingVessel].torpAttackMod - target.defenses
             target.hull = (target.hull - damage)
             time.sleep(1)
             print("The "+target.name+" took",damage,"damage.")
@@ -134,26 +136,30 @@ def turn(actingVessel):
 
           if targetSys == 1:
             print("The energy weapons are back up!")
-            vessels[aVesselIGuess].energyStatus = "Online"
-            vessels[aVesselIGuess].enAttackMod = 0
+            vessels[actingVessel].energyStatus = "Online"
+            vessels[actingVessel].enAttackMod = 0
           elif targetSys == 2:
             print("We have torpedoes!")
-            vessels[aVesselIGuess].torpedoStatus = "Online"
-            vessels[aVesselIGuess].torpAttackMod = 0
+            vessels[actingVessel].torpedoStatus = "Online"
+            vessels[actingVessel].torpAttackMod = 0
           elif targetSys == 3:
             print("Shields are back!")
-            vessels[aVesselIGuess].shieldStatus = "Online"
-            vessels[aVesselIGuess].shield = vessels[aVesselIGuess].shieldMax
+            vessels[actingVessel].shieldStatus = "Online"
+            vessels[actingVessel].shield = vessels[actingVessel].shieldMax
           elif targetSys == 4:
             print("We're moving again.")
-            vessels[aVesselIGuess].turn += 2
-            vessels[aVesselIGuess].impulse += .1
+            vessels[actingVessel].turn += 2
+            vessels[actingVessel].impulse += .1
           time.sleep(2)
           threeDone += 1
         else:
-          #print("\nChpose a system to repair.\n1. Energy Weapons\n2. Torpedoes\n3. Sensors\n4. Engines\n5. The Hull")
-          #orders = eval(input("\nYour orders? "))
-          heal_self = vessels[actingVessel].heal(orders)
+          heal_points = random.randint(250,500)
+          if vessels[actingVessel].hullMax > vessels[actingVessel].hull:
+            vessels[actingVessel].hull+=heal_points
+            print("We repaired",heal_points,"hull points.\nThe hull is at",vessels[actingVessel].hull)
+          else:
+            print("The hull is alreay at maximum (",vessels[actingVessel].hull,")")
+            officersActed-=1
           time.sleep(2)
           threeDone += 1
       
@@ -228,7 +234,7 @@ def oblivion(lost):
 battle_continue = True
 actingVessel = 0
 
-while battle_continue == False:
+while battle_continue == True:
 
   turn(actingVessel)
 
