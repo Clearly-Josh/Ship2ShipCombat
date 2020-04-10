@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.Dhelan("Gates"), Vessels.Miranda("USS Sitting Duck")]
+vessels = [Vessels.Dhelan("Gates"), Vessels.NX("USS Archer")]
 # calculate everybody's initial defensive rating
 length = len(vessels)    
 for i in range(length):

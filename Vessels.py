@@ -1,7 +1,7 @@
 import random
 
 def calcDefenses(ship2Calc):
-  ship2Calc.defenses = (ship2Calc.turn * 2) + (ship2Calc.impulse * 10) + (ship2Calc.shield * 100) + ship2Calc.maneuverBonus
+  ship2Calc.defenses = (ship2Calc.turn * 3) + (ship2Calc.impulse * 15) + (ship2Calc.shield * 1000) + ship2Calc.maneuverBonus
   print("Vessel defensive rating is now",ship2Calc.defenses)
   return ship2Calc.defenses
 
@@ -11,10 +11,10 @@ def displayShipName(self):
 class Miranda:
   def __init__(self, name):
     self.name = name
-    self.hull = 100
-    self.hullMax = 100
-    self.shield = 0
-    self.shieldMax = 0
+    self.hull = 10000
+    self.hullMax = 10000
+    self.shield = 1
+    self.shieldMax = 1
     self.shieldStatus="Online"
     self.turn = 11.4
     self.impulse = .2
