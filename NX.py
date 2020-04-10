@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.Miranda("USS Robert Scott"), Vessels.Saber("USS Skirata"), Vessels.Nova("USS Gates")]
+vessels = [Vessels.Dhelan("Gates"), Vessels.Miranda("USS Sitting Duck")]
 # calculate everybody's initial defensive rating
 length = len(vessels)    
 for i in range(length):
@@ -103,7 +103,7 @@ def turn(actingVessel):
             time.sleep(1)
             #print(target.hull)
             if target.hull <= 0:
-              oblivion(target)
+              oblivion(actingVessel)
             oneDone += 1
 
         if orders == 2:
@@ -122,7 +122,8 @@ def turn(actingVessel):
             time.sleep(1)
             #print(target.hull)
             if target.hull <= 0:
-              oblivion(target)
+              lost = vessels.index(target)
+              oblivion(lost)
             twoDone += 2
 
     if orders == 3:
@@ -227,8 +228,8 @@ def turn(actingVessel):
 
 def oblivion(lost):
   lostName = vessels[lost].name
-  vessels.pop(lost)
-  print("We mark the passing of the "+lostName+" and her crew. May God have mercy on their souls.")
+  vessels[lost].ded=True
+  print("\n 💀  We mark the passing of the "+lostName+" and her crew. May God have mercy on their souls. 💀")
 
 ### battle loop ###
 battle_continue = True
@@ -236,23 +237,42 @@ actingVessel = 0
 
 while battle_continue == True:
 
+  if vessels[actingVessel].ded == True:
+    actingVessel +=1
+  
   turn(actingVessel)
 
-  if len(vessels) <= 1:
+  #if len(vessels) <= 1:
+  #we need to check all vessels for ded here
+  length = len(vessels)  
+  dedCount = 0
+  for i in range(length):
+    if vessels[i].ded == True:
+      dedCount += 1
+    else:
+      champion = i
+  print(length)
+  print(dedCount)
+  if dedCount == (length-1):
     battle_continue = False
-    print("The",vessels[0],"has won the fight!")
+    print("The",vessels[champion].name,"has won the fight!")
+
+  if vessels[actingVessel].ded == True:
+    actingVessel +=1
 
   actingVessel += 1
+
   if actingVessel >= len(vessels):
     actingVessel = 0
     #battle_continue = False
   
-  print("\nTurn ended.\nReadying the",vessels[actingVessel].name)
-  time.sleep(1)
-  print("...")
-  time.sleep(1)
-  print("..")
-  time.sleep(1)
-  print(".")
-  time.sleep(1)
-  print("\n------------------------------------------------------------------\n")
+  if battle_continue == True:
+    print("\nTurn ended.\nReadying the",vessels[actingVessel].name)
+    time.sleep(1)
+    print("...")
+    time.sleep(1)
+    print("..")
+    time.sleep(1)
+    print(".")
+    time.sleep(1)
+    print("\n------------------------------------------------------------------\n")

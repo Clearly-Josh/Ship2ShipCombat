@@ -11,10 +11,10 @@ def displayShipName(self):
 class Miranda:
   def __init__(self, name):
     self.name = name
-    self.hull = 10000
-    self.hullMax = 10000
-    self.shield = 1
-    self.shieldMax = 1
+    self.hull = 100
+    self.hullMax = 100
+    self.shield = 0
+    self.shieldMax = 0
     self.shieldStatus="Online"
     self.turn = 11.4
     self.impulse = .2
@@ -30,6 +30,7 @@ class Miranda:
     self.torpMax=2000
     self.defenses = 0
     self.maneuverBonus = 0
+    self.ded = False
   
 #tests for Mirand class
 # p1 = Miranda("USS Robert Scott", 10000, 1)
@@ -59,6 +60,7 @@ class Saber:
     self.torpMax=2000
     self.defenses = 0
     self.maneuverBonus = 0
+    self.ded = False
 
 class Nova:
   def __init__(self, name):
@@ -82,4 +84,53 @@ class Nova:
     self.torpMax=2000
     self.defenses = 0
     self.maneuverBonus = 0
+    self.ded = False
+
+class Dhelan:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 15800
+    self.hullMax = 15800
+    self.shield = .95
+    self.shieldMax = .95
+    self.shieldStatus="Online"
+    self.turn = 16
+    self.impulse = .2
+    self.engineMax = 16.2 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.enBase=500
+    self.enMax=750
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.torpBase=750
+    self.torpMax=2000
+    self.defenses = 0
+    self.maneuverBonus = 0
+    self.ded = False
+
+class NX:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 10000
+    self.hullMax = 10000
+    self.shield = 1
+    self.shieldMax = 1
+    self.shieldStatus="Online"
+    self.turn = 14
+    self.impulse = .17
+    self.engineMax = 14.17 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.enBase=500
+    self.enMax=750
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.torpBase=750
+    self.torpMax=2000
+    self.defenses = 0
+    self.maneuverBonus = 0
+    self.ded = False
 
