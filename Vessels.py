@@ -22,12 +22,12 @@ class Miranda:
     #self.__attack_choice = attack_choice
     self.energyStatus="Online"
     self.enAttackMod=0
-    self.enBase=500
-    self.enMax=750
+    self.enBase=3500
+    self.enMax=4500
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.torpBase=750
-    self.torpMax=2000
+    self.torpBase=4500
+    self.torpMax=5500
     self.defenses = 0
     self.maneuverBonus = 0
     self.ded = False
@@ -52,12 +52,12 @@ class Saber:
     #self.__attack_choice = attack_choice
     self.energyStatus="Online"
     self.enAttackMod=0
-    self.enBase=500
-    self.enMax=750
+    self.enBase=3500
+    self.enMax=4500
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.torpBase=750
-    self.torpMax=2000
+    self.torpBase=4500
+    self.torpMax=5500
     self.defenses = 0
     self.maneuverBonus = 0
     self.ded = False
@@ -76,12 +76,12 @@ class Nova:
     #self.__attack_choice = attack_choice
     self.energyStatus="Online"
     self.enAttackMod=0
-    self.enBase=500
-    self.enMax=750
+    self.enBase=3500
+    self.enMax=4500
     self.torpedoStatus="Online"
     self.torpAttackMod=0
-    self.torpBase=750
-    self.torpMax=2000
+    self.torpBase=4500
+    self.torpMax=5500
     self.defenses = 0
     self.maneuverBonus = 0
     self.ded = False
@@ -130,6 +130,102 @@ class NX:
     self.torpAttackMod=0
     self.torpBase=750
     self.torpMax=2000
+    self.defenses = 0
+    self.maneuverBonus = 0
+    self.ded = False
+
+class ExeterRefit:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 19500
+    self.hullMax = 19500
+    self.shield = 1
+    self.shieldMax = 1
+    self.shieldStatus="Online"
+    self.turn = 9
+    self.impulse = .15
+    self.engineMax = 9.15 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.enBase=500
+    self.enMax=750
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.torpBase=750
+    self.torpMax=2000
+    self.defenses = 0
+    self.maneuverBonus = 0
+    self.ded = False
+
+class TuckerTactical:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 67500
+    self.hullMax = 67500
+    self.shield = 1.15
+    self.shieldMax = 1.15
+    self.shieldStatus="Online"
+    self.turn = 6
+    self.impulse = .16
+    self.engineMax = 6.16 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.enBase=3500
+    self.enMax=4500
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.torpBase=4500
+    self.torpMax=5500
+    self.defenses = 0
+    self.maneuverBonus = 0
+    self.ded = False
+
+class AtlasDreadnought:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 65700
+    self.hullMax = 65700
+    self.shield = 1.15
+    self.shieldMax = 1.15
+    self.shieldStatus="Online"
+    self.turn = 8
+    self.impulse = .15
+    self.engineMax = 8.15 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.enBase=3500
+    self.enMax=4500
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.torpBase=4500
+    self.torpMax=5500
+    self.defenses = 0
+    self.maneuverBonus = 0
+    self.ded = False
+
+class AvengerBattlecruiser:
+  def __init__(self, name):
+    self.name = name
+    self.hull = 61875
+    self.hullMax = 61875
+    self.shield = 1.1
+    self.shieldMax = 1.11
+    self.shieldStatus="Online"
+    self.turn = 9
+    self.impulse = .15
+    self.engineMax = 9.15 #turn + impulse
+    #self.__attack_choice = attack_choice
+    self.energyStatus="Online"
+    self.enAttackMod=0
+    self.enBase=3500
+    self.enMax=4500
+    self.torpedoStatus="Online"
+    self.torpAttackMod=0
+    self.torpBase=4500
+    self.torpMax=5500
     self.defenses = 0
     self.maneuverBonus = 0
     self.ded = False

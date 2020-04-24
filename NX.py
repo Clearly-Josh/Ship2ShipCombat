@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.Dhelan("Gates"), Vessels.NX("USS Archer")]
+vessels = [Vessels.AvengerBattlecruiser("USS Nerdopolis"), Vessels.Nova("USS Interceptor")]
 # calculate everybody's initial defensive rating
 length = len(vessels)    
 for i in range(length):
@@ -21,6 +21,38 @@ def listAndTarget():
   pewpew = eval(input("Who are we targeting? "))
   return vessels[pewpew]
 
+def systemRepair(actingVessel,sys,numRepairs):
+  if(numRepairs == 0):
+    roll = random.randint(0,1)
+    if roll == 0:
+      online = 1
+    else:
+      print("That didn't quite do it.")
+  elif(numRepairs >= 1):
+    roll = random.randint(0,99)
+    if roll <= 74:
+      online = 1
+    else:
+      print("System's still down.")
+  if online == 1:
+    if sys == 1:
+      print("Energy weapons are online!")
+      vessels[actingVessel].energyStatus = "Online"
+      vessels[actingVessel].enAttackMod = 0
+    elif sys == 2:
+      print("We have torpedoes!")
+      vessels[actingVessel].torpedoStatus = "Online"
+      vessels[actingVessel].torpAttackMod = 0
+    elif sys == 3:
+      print("Shields are back!")
+      vessels[actingVessel].shieldStatus = "Online"
+      vessels[actingVessel].shield = vessels[actingVessel].shieldMax
+    elif sys == 4:
+      print("We're moving again.")
+      vessels[actingVessel].turn += 2
+      vessels[actingVessel].impulse += .1
+
+
 def turn(actingVessel):
   #reset for turn
   officersActed = 0
@@ -35,6 +67,10 @@ def turn(actingVessel):
   torpOffline = 0
   shieldOffline = 0
   vessels[actingVessel].maneuverBonus = 0
+  enRepairs=0
+  torpRepairs=0
+  shieldRepairs=0
+  engineRepairs=0
 
   while officersActed <= 3:
     if officersActed == 0:
@@ -134,27 +170,23 @@ def turn(actingVessel):
         precision = eval(input("Repair 1. Our Hull or 2. A System? "))
         if precision == 2:
           targetSys = eval(input("1. Energy Weapons\n2. Torpedoes\n3. Shields\n4. Engines\n\nTarget which system? "))
-
           if targetSys == 1:
-            print("The energy weapons are back up!")
-            vessels[actingVessel].energyStatus = "Online"
-            vessels[actingVessel].enAttackMod = 0
+            systemRepair(actingVessel,targetSys,enRepairs)
+            enRepairs+=1
           elif targetSys == 2:
-            print("We have torpedoes!")
-            vessels[actingVessel].torpedoStatus = "Online"
-            vessels[actingVessel].torpAttackMod = 0
+            systemRepair(actingVessel,targetSys,torpRepairs)
+            torpRepairs+=1
           elif targetSys == 3:
-            print("Shields are back!")
-            vessels[actingVessel].shieldStatus = "Online"
-            vessels[actingVessel].shield = vessels[actingVessel].shieldMax
+            systemRepair(actingVessel,targetSys,shieldRepairs)
+            shieldRepairs+=1
           elif targetSys == 4:
-            print("We're moving again.")
-            vessels[actingVessel].turn += 2
-            vessels[actingVessel].impulse += .1
+            systemRepair(actingVessel,targetSys,engineRepairs)
+            engineRepairs+=1
           time.sleep(2)
-          threeDone += 1
+          #Can repair as many times as you'd like!
+          #threeDone += 1
         else:
-          heal_points = random.randint(250,500)
+          heal_points = random.randint(4000,4500)
           if vessels[actingVessel].hullMax > vessels[actingVessel].hull:
             vessels[actingVessel].hull+=heal_points
             print("We repaired",heal_points,"hull points.\nThe hull is at",vessels[actingVessel].hull)
@@ -162,7 +194,8 @@ def turn(actingVessel):
             print("The hull is alreay at maximum (",vessels[actingVessel].hull,")")
             officersActed-=1
           time.sleep(2)
-          threeDone += 1
+          #Can repair as many times as you'd like!
+          #threeDone += 1
       
     if orders == 4:
       if fourDone > 1:
@@ -200,7 +233,7 @@ def turn(actingVessel):
         print("We're already engaged in evasive maneuvers.")
         officersActed -= 1
       else:
-        vessels[actingVessel].maneuverBonus = 40
+        vessels[actingVessel].maneuverBonus = 500
         Vessels.calcDefenses(vessels[actingVessel])
         sixDone += 1
 
@@ -212,14 +245,14 @@ def turn(actingVessel):
         print("\n1. Energy Weapons\n2. Torpedoes\n3. Scanners\n4. Engines")
         orders = eval(input("\nEnhance which system? "))
         if orders == 1:
-          vessels[actingVessel].enAttackMod = 100
+          vessels[actingVessel].enAttackMod = 500
         elif orders == 2:
-          vessels[actingVessel].torpAttackMod = 120
+          vessels[actingVessel].torpAttackMod = 540
         elif orders == 3:
-          vessels[actingVessel].enAttackMod += 50
-          vessels[actingVessel].torpAttackMod += 50
+          vessels[actingVessel].enAttackMod += 200
+          vessels[actingVessel].torpAttackMod += 200
         elif orders == 4:
-          vessels[actingVessel].turn += 3
+          vessels[actingVessel].turn += 4
           vessels[actingVessel].impulse += .1
           Vessels.calcDefenses(vessels[actingVessel])
         sevenDone += 1
