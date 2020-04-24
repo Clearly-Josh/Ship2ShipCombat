@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.AvengerBattlecruiser("USS Nerdopolis"), Vessels.Nova("USS Interceptor")]
+vessels = [Vessels.TuckerTactical("USS Avid Horizon"), Vessels.AtlasDreadnought("USS Interceptor")]
 # calculate everybody's initial defensive rating
 length = len(vessels)    
 for i in range(length):
@@ -22,6 +22,7 @@ def listAndTarget():
   return vessels[pewpew]
 
 def systemRepair(actingVessel,sys,numRepairs):
+  online = 0
   if(numRepairs == 0):
     roll = random.randint(0,1)
     if roll == 0:
