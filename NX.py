@@ -4,7 +4,7 @@ import random
 import Vessels
 import time
 
-vessels = [Vessels.TuckerTactical("USS Avid Horizon"), Vessels.AtlasDreadnought("USS Interceptor")]
+vessels = [Vessels.Dhelan("RDW Infinity Bound"), Vessels.Nova("USS Gates")]
 # calculate everybody's initial defensive rating
 length = len(vessels)    
 for i in range(length):
@@ -140,7 +140,7 @@ def turn(actingVessel):
             time.sleep(1)
             #print(target.hull)
             if target.hull <= 0:
-              oblivion(actingVessel)
+              oblivion(target.name)
             oneDone += 1
 
         if orders == 2:
